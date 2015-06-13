@@ -37,16 +37,23 @@ syn keyword xqyTypeSigKeyword   as nextgroup=xqyType skipwhite
 syn match   xqyType             /\k+\(:\k\+\)\?/ contained
 syn cluster xqyPrologStatements contains=xqyPrologKeyword,xqyDecl,xqyDeclVar,xyDeclFun,xqyDeclCons,xqyDeclConsOpt
 
-syn keyword xqyFLWOR            for in let where group by order by return
+syn keyword xqyFLWOR            for in let where group by order by at count return
+syn keyword xqyUpdate           modify insert node nodes into as last as first before after
+syn keyword xqyWindow           tumbling sliding window start when end only
 
 syn keyword xqyConstructor      attribute
 syn match   xqyConstructor      /\(element\|comment\|processing-instruction\)\ze\s/
 
-syn keyword xqyConditional      if then else
+syn keyword xqyConditional      if then else every some
 syn keyword xqyConditional      or and 
-syn keyword xqyConditional      typeswitch
+syn keyword xqyConditional      typeswitch 
 syn keyword xqyConditional      switch case default
 syn keyword xqyConditional      try catch
+syn keyword xqyConditional      contains text not in ftor ftand ftnot any all ordered distance at most words same sentence without occurs
+syn keyword xqyConditional      using case sensitive diacritics using stemming language stop wildcards score fuzzy thesaurus
+
+syn keyword xqyMapArray         map array
+syn keyword xqyMap              ! =>
 
 syn keyword xqyTodo             TODO XXX FIXME contained
 syn match   xqyDocKeyword       display /@\(version\|since\|deprecated\|error\|return\|param\|author\|see\)/ contained nextgroup=xqyVariable skipwhite
@@ -59,6 +66,7 @@ hi def link xqyAttrString       String
 hi def link xqyStartTag         Constant
 hi def link xqyEndTag           Constant
 
+hi def link xqyMapArray         Comment
 hi def link xqyComment          Comment
 hi def link xqyDocComment       Comment
 hi def link xqyDocKeyword       SpecialComment
@@ -76,9 +84,12 @@ hi def link xqyTypeSigKeyword   PreProc
 hi def link xqyVariableExt      PreProc
 
 hi def link xqyFLWOR            Keyword
+hi def link xqyUpdate           Keyword
+hi def link xqyWindow           Keyword
 hi def link xqyConstructor      Keyword
 hi def link xqyConditional      Conditional
 
 hi def link xqyVariable         Identifier
 hi def link xqyAnnotation       Identifier
+hi def link xqyMap              Identifier
 hi def link xqyType             Type
