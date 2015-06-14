@@ -21,6 +21,9 @@ syn region  xqyAttrString       start=/\z(['"]\)/ skip=/\\\z1/ end=/\z1/ contain
 syn region  xqyStartTag         start=#<\([= \/]\)\@!# end=#># contains=xqyAttrString
 syn region  xqyEndTag           start=#</# end=#># contains=xqyQName
 
+" syn region  jsonProp            start=/\z(['"]\)/ skip=/\\\z1/ end=/\z1[:]/ contained 
+syn match   jsonProp            /["']\(\w\|[@_:-]\)*["']:/
+
 syn keyword xqyPrologKeyword    xquery version module namespace import at external
 syn keyword xqyDecl             declare nextgroup=xqyOption,xqyContext,xqyDeclFun,xqyDeclVar,xqyDeclCons skipwhite
 syn keyword xqyDeclCons         construction nextgroup=xqyDeclConsOpt skipwhite
@@ -38,7 +41,7 @@ syn match   xqyType             /\k+\(:\k\+\)\?/ contained
 syn cluster xqyPrologStatements contains=xqyPrologKeyword,xqyDecl,xqyDeclVar,xyDeclFun,xqyDeclCons,xqyDeclConsOpt
 
 syn keyword xqyFLWOR            for in let where group by order by at count return
-syn keyword xqyUpdate           modify insert node nodes into as last as first before after
+syn keyword xqyUpdate           modify copy delete rename insert node nodes into last first before after
 syn keyword xqyWindow           tumbling sliding window start when end only
 
 syn keyword xqyConstructor      attribute
@@ -49,11 +52,12 @@ syn keyword xqyConditional      or and
 syn keyword xqyConditional      typeswitch 
 syn keyword xqyConditional      switch case default
 syn keyword xqyConditional      try catch
-syn keyword xqyConditional      contains text not in ftor ftand ftnot any all ordered distance at most words same sentence without occurs
+syn keyword xqyConditional      text not in ftor ftand ftnot any all ordered distance most words same sentence without occurs
 syn keyword xqyConditional      using case sensitive diacritics using stemming language stop wildcards score fuzzy thesaurus
+syn match   xqyConditional      /contains/
+syn keyword xqyMapArrayType     map array
 
-syn keyword xqyMapArray         map array
-syn keyword xqyMap              ! =>
+syn match   xqyMap              /\s!\s\|=>/
 
 syn keyword xqyTodo             TODO XXX FIXME contained
 syn match   xqyDocKeyword       display /@\(version\|since\|deprecated\|error\|return\|param\|author\|see\)/ contained nextgroup=xqyVariable skipwhite
@@ -63,8 +67,10 @@ syn region  xqyComment          start="(\:\(\~\)\@!" end="\:)" contains=xqyTodo,
 " ==============================
 hi def link xqyString           String
 hi def link xqyAttrString       String
-hi def link xqyStartTag         Constant
-hi def link xqyEndTag           Constant
+hi def link xqyStartTag         Question
+hi def link jsonProp            Question
+hi def link xqyEndTag           Special
+hi def link xqyNamespace        Special
 
 hi def link xqyMapArray         Comment
 hi def link xqyComment          Comment
@@ -82,6 +88,7 @@ hi def link xqyOption           Define
 hi def link xqyPrologKeyword    PreProc
 hi def link xqyTypeSigKeyword   PreProc
 hi def link xqyVariableExt      PreProc
+hi def link xqyMapArrayType     PreProc
 
 hi def link xqyFLWOR            Keyword
 hi def link xqyUpdate           Keyword
