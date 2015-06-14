@@ -21,7 +21,7 @@ syn region  xqyAttrString       start=/\z(['"]\)/ skip=/\\\z1/ end=/\z1/ contain
 syn region  xqyStartTag         start=#<\([= \/]\)\@!# end=#># contains=xqyAttrString
 syn region  xqyEndTag           start=#</# end=#># contains=xqyQName
 
-" syn region  jsonProp            start=/\z(['"]\)/ skip=/\\\z1/ end=/\z1[:]/ contained 
+" syn region  jsonProp          start=/\z(['"]\)/ skip=/\\\z1/ end=/\z1[:]/ contained 
 syn match   jsonProp            /["']\(\w\|[@_:-]\)*["']:/
 
 syn keyword xqyPrologKeyword    xquery version module namespace import at external
@@ -32,11 +32,12 @@ syn keyword xqyDeclVar          variable nextgroup=xqyVariable external skipwhit
 syn keyword xqyContext          context item skipwhite
 syn keyword xqyOption           option skipwhite
 syn keyword xqyDeclFun          function nextgroup=xqyFunction skipwhite
+syn match   xqyNamespace        /\(\w\|[-_]\)*:/ 
 
 syn match   xqyVariable         /\$\k\+/
 syn match   xqyAnnotation       /%\k\+\(:\k\+\)\?/
 syn match   xqyFunction         /\k\+\(:\k\+\)\?()/ " FIXME 
-syn keyword xqyTypeSigKeyword   as nextgroup=xqyType skipwhite
+syn keyword xqyTypeSigKeyword   as xs nextgroup=xqyType skipwhite
 syn match   xqyType             /\k+\(:\k\+\)\?/ contained
 syn cluster xqyPrologStatements contains=xqyPrologKeyword,xqyDecl,xqyDeclVar,xyDeclFun,xqyDeclCons,xqyDeclConsOpt
 
